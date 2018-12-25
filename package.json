@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "dgrid": "^1.2.1",
+    "dijit": "dojo/dijit",
+    "dojo": "dojo/dojo",
+    "dojo-util": "dojo/util",
+    "dojox": "dojo/dojox"
+  }
+}
