@@ -1,9 +1,6 @@
 {
-  "dependencies": {
-    "dgrid": "^1.2.1",
-    "dijit": "dojo/dijit",
-    "dojo": "dojo/dojo",
-    "dojo-util": "dojo/util",
-    "dojox": "dojo/dojox"
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "fs": "^0.0.1-security"
   }
 }
