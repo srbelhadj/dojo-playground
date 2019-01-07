@@ -25,44 +25,74 @@
       dojo.require("dojo.data.ItemFileWriteStore");
 
       dojo.ready(function() {
+
+        
+
         /*set up data store*/
         var data = {
           identifier: "id",
-          items: []
-        };
-        var data_list = [
-          {
-            col1: "normal",
-            col2: false,
-            col3: "But are not followed by two hexadecimal",
-            col4: 29.91
-          },
-          {
-            col1: "important",
-            col2: false,
-            col3: "Because a % sign always indicates",
-            col4: 9.33
-          },
-          {
-            col1: "important",
-            col2: false,
-            col3: "Signs can be selectively",
-            col4: 19.34
+          items: [],
+          method: function(response){
+            this.items.push(...response.data);
+            console.log("Hello");
           }
+        };
+        var data_list =
+        [
+          // {
+          //   col1: "normal",
+          //   col2: false,
+          //   col3: "But are not followed by two hexadecimal",
+          //   col4: 29.91
+          // },
+          // {
+          //   col1: "important",
+          //   col2: false,
+          //   col3: "Because a % sign always indicates",
+          //   col4: 9.33
+          // },
+          // {
+          //   col1: "important",
+          //   col2: false,
+          //   col3: "Signs can be selectively",
+          //   col4: 19.34
+          // }
         ];
-        var rows = 200;
-        for (var i = 0, l = data_list.length; i < rows; i++) {
-          data.items.push(dojo.mixin({ id: i + 1 }, data_list[i % l]));
-        }
-        var store = new dojo.data.ItemFileWriteStore({ data: data });
+              // get some data, convert to JSON
+
+
+        // var rows = 200;
+        // for (var i = 0, l = data_list.length; i < rows; i++) {
+        //   data.items.push(dojo.mixin({ id: i + 1 }, data_list[i % l]));
+        // }
+
+        dojo.xhrGet({
+          url:"http://localhost:80/php-rest-playground/api/post/read.php",
+          handleAs:"json",
+          headers: {
+            "X-Requested-With" : null
+          },
+          load: dojo.hitch(data, "method")
+        });
+
+        console.log(data);
+
+
+        var store = new dojo.data.ItemFileWriteStore({data:data});
+        console.log(store)
+
+
+
+        
 
         /*set up layout*/
         var layout = [
           [
             { name: "Column 1", field: "id" },
-            { name: "Column 2", field: "col2" },
-            { name: "Column 3", field: "col3", width: "230px" },
-            { name: "Column 4", field: "col4" }
+            { name: "Column 2", field: "title" },
+            { name: "Column 3", field: "body", width: "230px" },
+            { name: "Column 4", field: "author" },
+            { name: "Column 5", field: "category_name" }
           ]
         ];
 
