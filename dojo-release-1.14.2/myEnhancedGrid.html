@@ -29,57 +29,63 @@
         
 
         /*set up data store*/
-        var data = {
+        var mdata = {
           identifier: "id",
           items: [],
-          method: function(response){
+          method:  function(response){
             this.items.push(...response.data);
-            console.log("Hello");
+             console.log(this.items);
           }
         };
-        var data_list =
-        [
-          // {
-          //   col1: "normal",
-          //   col2: false,
-          //   col3: "But are not followed by two hexadecimal",
-          //   col4: 29.91
-          // },
-          // {
-          //   col1: "important",
-          //   col2: false,
-          //   col3: "Because a % sign always indicates",
-          //   col4: 9.33
-          // },
-          // {
-          //   col1: "important",
-          //   col2: false,
-          //   col3: "Signs can be selectively",
-          //   col4: 19.34
-          // }
-        ];
-              // get some data, convert to JSON
 
-
-        // var rows = 200;
-        // for (var i = 0, l = data_list.length; i < rows; i++) {
-        //   data.items.push(dojo.mixin({ id: i + 1 }, data_list[i % l]));
-        // }
-
-        dojo.xhrGet({
+         dojo.xhrGet({
           url:"http://localhost:80/php-rest-playground/api/post/read.php",
           handleAs:"json",
           headers: {
             "X-Requested-With" : null
           },
-          load: dojo.hitch(data, "method")
+          sync: true,
+
+          load: dojo.hitch(mdata, "method")
         });
 
-        console.log(data);
+        var data_list =
+        [
+        //   {
+        //     col1: "normal",
+        //     col2: false,
+        //     col3: "But are not followed by two hexadecimal",
+        //     col4: 29.91
+        //   },
+        //   {
+        //     col1: "important",
+        //     col2: false,
+        //     col3: "Because a % sign always indicates",
+        //     col4: 9.33
+        //   },
+        //   {
+        //     col1: "important",
+        //     col2: false,
+        //     col3: "Signs can be selectively",
+        //     col4: 19.34
+        //   }
+        ];
+              // get some data, convert to JSON
 
 
-        var store = new dojo.data.ItemFileWriteStore({data:data});
-        console.log(store)
+        //  var rows = 200;
+         
+        // for (var i = 0, l = data_list.length; i < rows; i++) {
+        //   data.items.push(dojo.mixin({ id: i + 1 }, data_list[i % l]));
+        // }
+
+   
+
+        // console.log(data);
+
+
+        var store = new dojo.data.ItemFileWriteStore({data:mdata});
+        // console.log(store)
 
 
 
